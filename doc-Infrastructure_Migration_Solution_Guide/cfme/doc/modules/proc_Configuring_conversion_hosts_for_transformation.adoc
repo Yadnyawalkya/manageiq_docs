@@ -193,13 +193,14 @@ If the conversion hosts are configured correctly, proceed to the next step:
 +
 For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation site]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
 
-. Copy the public key you created in xref:VDDK_and_SSH_Configuring_the_conversion_hosts[] to each VMware hypervisor to ensure that the Manager or the OpenStack Platform conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
+. Copy the public key you created in extra_vars.yml of xref:VDDK_and_SSH_Configuring_the_conversion_hosts[] to each VMware hypervisor to ensure that the Manager or the OpenStack Platform conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
 +
 [options="nowrap" subs="verbatim"]
 ----
 # ssh root@_esx1.example.com_ sh -c \
     'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
-#   'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
+# ssh root@_esx1.example.com_ sh -c \
+    'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
 ----
 
 .Red Hat Virtualization
@@ -227,7 +228,7 @@ You are ready to xref:Authenticating_rhv_conversion_hosts_in_cloudforms[authenti
 
 .OpenStack Platform
 
-Connect to the VM hypervisor as `cloud-user` to validate the SSH connection.
+Connect to the VM hypervisor as `root` to validate the SSH connection.
 
 If the connection is successful, the conversion host is correctly configured for SSH transformation.
 
